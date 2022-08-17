@@ -1,9 +1,5 @@
 ﻿using Contracts;
-using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace FridgeAPI.Controllers
@@ -24,32 +20,9 @@ namespace FridgeAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetFridges()
         {
-            //var fridges = await _repositoryManager.Fridge.GetAllFridgesAsync(trackChanges: false);
+            var fridges = await _repositoryManager.Fridge.GetAllFridgesAsync(trackChanges: false);
 
-            //return Ok(fridges);
-
-            Thread.Sleep(5);
-            return Ok(new List<Fridge>
-            {
-                new Fridge
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "AAA",
-                    OwnerName = "aaa"
-                },
-                new Fridge
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "BBB",
-                    OwnerName = "bbb"
-                },
-                new Fridge
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "CCC",
-                    OwnerName = "ccc"
-                },
-            });
+            return Ok(fridges);
         }
 
     }

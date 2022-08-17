@@ -1,28 +1,28 @@
-﻿using Contracts;
-using LoggerService;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
+﻿using AspNetCoreRateLimit;
+using Contracts;
 using Entities.Context;
-using Repository;
-using FridgeAPI.Formatterrs;
+using Entities.Models;
+using FridgeAPI.Controllers;
+using FridgeAPI.Formatters;
+using LoggerService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
-using FridgeAPI.Controllers;
-using AspNetCoreRateLimit;
-using System.Collections.Generic;
-using Entities.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.IO;
-using System.Reflection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Microsoft.OpenApi.Models;
+using Repository;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 
 namespace FridgeAPI.Extensions
 {
@@ -62,7 +62,8 @@ namespace FridgeAPI.Extensions
             services.Configure<MvcOptions>(config =>
             {
                 var newtonsoftJsonOutputFormatter = config.OutputFormatters
-                    .OfType<NewtonsoftJsonOutputFormatter>()?.FirstOrDefault();
+                    .OfType<NewtonsoftJsonOutputFormatter>()
+                    .FirstOrDefault();
 
                 if (newtonsoftJsonOutputFormatter != null)
                 {
@@ -73,7 +74,8 @@ namespace FridgeAPI.Extensions
                 }
 
                 var xmlOutputFormatter = config.OutputFormatters
-                    .OfType<XmlDataContractSerializerOutputFormatter>()?.FirstOrDefault();
+                    .OfType<XmlDataContractSerializerOutputFormatter>()
+                    .FirstOrDefault();
 
                 if (xmlOutputFormatter != null)
                 {
@@ -177,7 +179,7 @@ namespace FridgeAPI.Extensions
 
                     ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
                     ValidAudience = jwtSettings.GetSection("validAudience").Value,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!))
                 };
             });
         }

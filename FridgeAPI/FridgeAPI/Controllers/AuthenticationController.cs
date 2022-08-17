@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Contracts;
+using Entities.DataTransferObjects;
 using Entities.Models;
+using Filters.ActionFilters;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using Filters.ActionFilters;
-using Entities.DataTransferObjects;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FridgeAPI.Controllers
 {
@@ -55,7 +55,7 @@ namespace FridgeAPI.Controllers
             }
 
             var notExistRoles = new StringBuilder();
-            foreach (var role in userForRegistration.Roles)
+            foreach (var role in userForRegistration.Roles!)
             {
                 if (!await _roleManager.RoleExistsAsync(role))
                 {
@@ -66,9 +66,8 @@ namespace FridgeAPI.Controllers
             if (notExistRoles.Length != 0)
             {
                 notExistRoles.Remove(notExistRoles.Length - 2, 2);
-                return BadRequest($"The {notExistRoles.ToString()} roles is not in the database.");
+                return BadRequest($"The {notExistRoles} roles is not in the database.");
             }
-            notExistRoles = null;
 
             await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
             return StatusCode(201);
