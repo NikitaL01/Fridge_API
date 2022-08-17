@@ -58,16 +58,10 @@ namespace FridgeAPI
             {
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
-
-                //config.CacheProfiles.Add("120SecondsDuration",
-                //    new CacheProfile { Duration = 120 });
             }).AddNewtonsoftJson()
             .AddXmlDataContractSerializerFormatters()
             .AddCustomCsvFormatter();
 
-            //services.ConfigureResponseCaching();
-            //services.AddHttpContextAccessor();
-            //services.ConfigureHttpCacheHeaders();
             services.AddCustomMediaTypes();
 
             services.AddMemoryCache();
@@ -112,9 +106,6 @@ namespace FridgeAPI
                 ForwardedHeaders = ForwardedHeaders.All
             });
 
-            //app.UseResponseCaching();
-            //app.UseHttpCacheHeaders();
-
             app.UseIpRateLimiting();
 
             app.UseRouting();
@@ -129,7 +120,3 @@ namespace FridgeAPI
         }
     }
 }
-
-//https://code-maze.com/unit-testing-aspnetcore-web-api/
-//https://www.thecodebuzz.com/unit-test-mock-actionfilter-asp-net-core-actionexecutingcontext-moq/
-//https://stackoverflow.com/questions/62799045/how-do-i-unit-test-a-controller-that-is-decorated-with-the-servicefilterattribut
