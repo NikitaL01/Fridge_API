@@ -19,8 +19,6 @@ namespace FridgeAPI_Tests.Tests.UnitTests
     {
         private readonly FridgeController _controller;
         private readonly RepositoryManagerMock _repository;
-        private readonly Mock<ILoggerManager> _loggerManagerMock;
-        private readonly IMapper _mapper;
         private readonly Mock<ActionExecutionDelegate> _actionExecutionDelegate;
         private readonly ActionContext _actionContext;
         private readonly ValidationFilterAttribute _validationFilterAttribute;
@@ -29,14 +27,14 @@ namespace FridgeAPI_Tests.Tests.UnitTests
         public FridgeControllerUnitTests()
         {
             _repository = new RepositoryManagerMock();
-            _loggerManagerMock = new Mock<ILoggerManager>();
+            var loggerManagerMock = new Mock<ILoggerManager>();
 
             var myProfile = new MappingProfile();
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-            _mapper = new Mapper(configuration);
+            IMapper mapper = new Mapper(configuration);
 
             var httpContext = new DefaultHttpContext();
-            _controller = new FridgeController(_loggerManagerMock.Object, _repository, _mapper)
+            _controller = new FridgeController(loggerManagerMock.Object, _repository, mapper)
             {
                 ControllerContext = new ControllerContext
                 {
@@ -54,9 +52,9 @@ namespace FridgeAPI_Tests.Tests.UnitTests
             );
 
             _validationFilterAttribute = new ValidationFilterAttribute(
-                _loggerManagerMock.Object);
+                loggerManagerMock.Object);
             _validateFridgeExistsAttribute = new ValidateFridgeExistsAttribute(
-                _repository, _loggerManagerMock.Object);
+                _repository, loggerManagerMock.Object);
         }
 
         [Fact]
@@ -66,7 +64,7 @@ namespace FridgeAPI_Tests.Tests.UnitTests
             var okResult = await _controller.GetFridges() as OkObjectResult;
 
             //Assert
-            var items = Assert.IsType<List<FridgeDto>>(okResult.Value);
+            var items = Assert.IsType<List<FridgeDto>>(okResult?.Value);
             Assert.Equal(3, items.Count());
         }
 
@@ -140,8 +138,8 @@ namespace FridgeAPI_Tests.Tests.UnitTests
             var okResult = await _controller.GetFridge(testGuid) as OkObjectResult;
 
             //Assert
-            Assert.IsType<FridgeDto>(okResult.Value);
-            Assert.Equal(testGuid, (okResult.Value as FridgeDto).Id);
+            Assert.IsType<FridgeDto>(okResult?.Value);
+            Assert.Equal(testGuid, ((okResult?.Value as FridgeDto)!).Id);
         }
 
         [Fact]
@@ -203,11 +201,11 @@ namespace FridgeAPI_Tests.Tests.UnitTests
 
             //Act
             var createdResponse = await _controller.CreateFridge(testItem) as CreatedAtRouteResult;
-            var item = createdResponse.Value as FridgeDto;
+            var item = createdResponse?.Value as FridgeDto;
 
             //Assert
             Assert.IsType<FridgeDto>(item);
-            Assert.Equal(testItem.Name, item.Name);
+            Assert.Equal(testItem.Name, item?.Name);
         }
 
         [Fact]
@@ -258,8 +256,8 @@ namespace FridgeAPI_Tests.Tests.UnitTests
             var okResult = await _controller.GetFridgeCollection(testIds) as OkObjectResult;
 
             //Assert
-            Assert.IsType<List<FridgeDto>>(okResult.Value);
-            Assert.Equal(testIds, (okResult.Value as List<FridgeDto>)
+            Assert.IsType<List<FridgeDto>>(okResult?.Value);
+            Assert.Equal(testIds, ((okResult?.Value as List<FridgeDto>)!)
                 .Select(i => i.Id).ToList());
         }
 
@@ -267,7 +265,7 @@ namespace FridgeAPI_Tests.Tests.UnitTests
         public async void CreateFridgeCollection_InvalidObjectPassed_ReturnsBadRequest()
         {
             //Arrange
-            IEnumerable<FridgeForCreationDto> testItems = null;
+            IEnumerable<FridgeForCreationDto>? testItems = null;
             _controller.ModelState.AddModelError("fridgeCollection", "null");
 
             //Act
@@ -323,12 +321,12 @@ namespace FridgeAPI_Tests.Tests.UnitTests
             //Act
             var createdResponse = await _controller.CreateFridgeCollection(testItems)
                 as CreatedAtRouteResult;
-            var item = createdResponse.Value as List<FridgeDto>;
+            var item = createdResponse?.Value as List<FridgeDto>;
 
             //Assert
             Assert.IsType<List<FridgeDto>>(item);
             Assert.Equal(testItems.Select(i => i.Name).ToList(),
-                item.Select(i => i.Name).ToList());
+                item!.Select(i => i.Name).ToList());
         }
 
         [Fact]
@@ -400,10 +398,11 @@ namespace FridgeAPI_Tests.Tests.UnitTests
             // Act
             await _validateFridgeExistsAttribute.OnActionExecutionAsync(actionExecutingContext,
                 _actionExecutionDelegate.Object);
-            var noContentResponse = await _controller.DeleteFridge(existingGuid);
+            await _controller.DeleteFridge(existingGuid);
 
             // Assert
-            Assert.Equal(2, (await _repository.Fridge.GetAllFridgesAsync(false)).ToList().Count());
+            Assert.Equal(2, (await _repository.Fridge.GetAllFridgesAsync(false))
+                .ToList().Count());
         }
 
         [Fact]
@@ -497,12 +496,11 @@ namespace FridgeAPI_Tests.Tests.UnitTests
             _validationFilterAttribute.OnActionExecuting(actionExecutingContext);
             await _validateFridgeExistsAttribute.OnActionExecutionAsync(
                 actionExecutingContext, _actionExecutionDelegate.Object);
-            var noContentResponse = await _controller.UpdateFridge(existingGuid, fridgeForUpdateDto);
+            await _controller.UpdateFridge(existingGuid, fridgeForUpdateDto);
 
             //Assert
-            Assert.Equal((await _repository.Fridge.GetAllFridgesAsync(false))
-                .FirstOrDefault(i => i.Id.Equals(existingGuid)).OwnerName,
-                fridgeForUpdateDto.OwnerName);
+            Assert.Equal((await _repository.Fridge.GetFridgeAsync(existingGuid, false))
+                .OwnerName, fridgeForUpdateDto.OwnerName);
         }
     }
 }

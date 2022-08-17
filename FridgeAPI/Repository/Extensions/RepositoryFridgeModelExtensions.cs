@@ -1,6 +1,6 @@
 ﻿using Entities.Models;
-using System.Linq.Dynamic.Core;
 using Repository.Extensions.Utility;
+using System.Linq.Dynamic.Core;
 
 namespace Repository.Extensions
 {
@@ -20,7 +20,7 @@ namespace Repository.Extensions
 
             var lowerCaseTerm = searchTerm.Trim().ToLower();
 
-            return fridgeModels.Where(i => i.Name.ToLower().Contains(lowerCaseTerm));
+            return fridgeModels.Where(i => i.Name!.ToLower().Contains(lowerCaseTerm));
         }
 
         public static IQueryable<FridgeModel> Sort(this IQueryable<FridgeModel> fridgeModels,

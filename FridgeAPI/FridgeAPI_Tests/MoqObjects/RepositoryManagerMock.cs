@@ -4,15 +4,13 @@ namespace FridgeAPI_Tests.MoqObjects
 {
     public class RepositoryManagerMock : IRepositoryManager
     {
-        private IFridgeRepository _fridgeRepository;
+        private IFridgeRepository? _fridgeRepository;
 
-        private IFridgeModelRepository _fridgeModelRepository;
+        private IFridgeModelRepository? _fridgeModelRepository;
 
-        private IFridgeProductsRepository _fridgeProductsRepository;
+        private IFridgeProductsRepository? _fridgeProductsRepository;
 
-        private IProductsRepository _productsRepository;
-
-        public RepositoryManagerMock() { }
+        private IProductsRepository? _productsRepository;
 
         public IFridgeRepository Fridge
         {

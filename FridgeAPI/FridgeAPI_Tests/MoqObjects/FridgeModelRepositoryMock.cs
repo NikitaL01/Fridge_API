@@ -50,7 +50,7 @@ namespace FridgeAPI_Tests.MoqObjects
         public async Task<FridgeModel> GetFridgeModelAsync(Guid fridgeId, Guid fridgeModelId,
             bool trackChanges)
         {
-            return _fridgeModels.FirstOrDefault(i => i.Id.Equals(fridgeModelId));
+            return _fridgeModels.FirstOrDefault(i => i.Id.Equals(fridgeModelId))!;
         }
 
         public async Task<PagedList<FridgeModel>> GetFridgeModelsAsync(Guid fridgeId,

@@ -7,12 +7,12 @@ namespace Repository.Extensions.Utility
     {
         public static string CreateOrderQuery<T>(string? orderByQueryString)
         {
-            var orderParams = orderByQueryString.Trim().Split(',');
+            var orderParams = orderByQueryString?.Trim().Split(',');
             var propertyInfos = typeof(T)
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance);
             var orderQueryBuilder = new StringBuilder();
 
-            foreach (var param in orderParams)
+            foreach (var param in orderParams!)
             {
                 if (string.IsNullOrWhiteSpace(param))
                 {
@@ -31,7 +31,7 @@ namespace Repository.Extensions.Utility
 
                 var direction = param.EndsWith(" desc") ? "descending" : "ascending";
 
-                orderQueryBuilder.Append($"{objectProperty.Name.ToString()} {direction},");
+                orderQueryBuilder.Append($"{objectProperty.Name} {direction},");
             }
 
             var orderQuery = orderQueryBuilder.ToString().TrimEnd(',', ' ');

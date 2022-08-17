@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FridgeAPI.Formatterrs
+namespace FridgeAPI.Formatters
 {
     public class CsvOutputFormatter : TextOutputFormatter
     {

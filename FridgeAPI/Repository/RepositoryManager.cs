@@ -7,13 +7,13 @@ namespace Repository
     {
         private RepositoryContext _repositoryContext;
 
-        private IFridgeRepository _fridgeRepository;
+        private IFridgeRepository _fridgeRepository = null!;
 
-        private IFridgeModelRepository _fridgeModelRepository;
+        private IFridgeModelRepository _fridgeModelRepository = null!;
 
-        private IFridgeProductsRepository _fridgeProductsRepository;
+        private IFridgeProductsRepository _fridgeProductsRepository = null!;
 
-        private IProductsRepository _productsRepository;
+        private IProductsRepository _productsRepository = null!;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {

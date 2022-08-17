@@ -55,7 +55,7 @@ namespace FridgeAPI_Tests.MoqObjects
 
         public async Task<Fridge> GetFridgeAsync(Guid fridgeId, bool trackChanges)
         {
-            return _fridges.Where(i => i.Id.Equals(fridgeId)).SingleOrDefault();
+            return _fridges.Where(i => i.Id.Equals(fridgeId)).SingleOrDefault()!;
         }
     }
 }

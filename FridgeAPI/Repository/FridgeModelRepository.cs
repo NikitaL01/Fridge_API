@@ -35,8 +35,8 @@ namespace Repository
 
         public async Task<FridgeModel> GetFridgeModelAsync(Guid fridgeId, Guid fridgeModelId,
             bool trackChanges) =>
-                await FindByCondition(i => i.Id.Equals(fridgeModelId), trackChanges)
-                    .SingleOrDefaultAsync();
+                (await FindByCondition(i => i.Id.Equals(fridgeModelId), trackChanges)
+                    .SingleOrDefaultAsync())!;
 
         public void CreateFridgeModel(Guid fridgeId, FridgeModel fridgeModel)
         {

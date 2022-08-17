@@ -14,8 +14,8 @@ namespace Repository
         public async Task<IEnumerable<Fridge>> GetAllFridgesAsync(bool trackChanges) =>
             await FindAll(trackChanges).ToListAsync();
         public async Task<Fridge> GetFridgeAsync(Guid fridgeId, bool trackChanges) =>
-            await FindByCondition(i => i.Id.Equals(fridgeId), trackChanges)
-                .SingleOrDefaultAsync();
+            (await FindByCondition(i => i.Id.Equals(fridgeId), trackChanges)
+                .SingleOrDefaultAsync())!;
 
         public void CreateFridge(Fridge fridge) => Create(fridge);
 

@@ -482,7 +482,6 @@ namespace FridgeAPI_Tests.Tests.UnitTests
             // Arrange
             var existingFridgeGuid = new Guid("ab2bd817-98cd-4cf3-a80a-53ea0cd9c200");
             var existingFridgeModelGuid = new Guid("aaf10bfc-4b57-4794-a509-87fe5cda85c1");
-            var fridgeModelParameters = new FridgeModelParameters();
 
             var actionExecutingContext = new ActionExecutingContext(
                 _actionContext,
@@ -498,12 +497,13 @@ namespace FridgeAPI_Tests.Tests.UnitTests
             // Act
             await _validateFridgeModelForFridgeExistsAttribute.OnActionExecutionAsync(
                 actionExecutingContext, _actionExecutionDelegate.Object);
+            await _controller.DeleteFridgeModelForFridge(existingFridgeGuid, existingFridgeModelGuid);
 
 
             // Assert
-            Assert.Empty((await _repository.FridgeModel
-                .GetFridgeModelsAsync(existingFridgeGuid, fridgeModelParameters, false))
-                .ToList());
+            Assert.Equal((await _repository.FridgeModel
+                    .GetFridgeModelAsync(existingFridgeGuid, existingFridgeModelGuid, false))
+                , null);
         }
 
         [Fact]
