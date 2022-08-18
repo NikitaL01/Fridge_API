@@ -5,11 +5,18 @@
     <projectFile profileName="IIS Express">FridgeAPI/FridgeAPI.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2113cdfb-dd0a-4b87-b4bb-0bdcf2216bd3" name="Changes" comment="" />
+    <list default="true" id="2113cdfb-dd0a-4b87-b4bb-0bdcf2216bd3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FridgeAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FridgeAPI/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Git/Fridge_API/FridgeAPI/FridgeAPI_Tests/MoqObjects/RepositoryManagerMock.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Git/Fridge_API/FridgeAPI/FridgeAPI_Tests/MoqObjects/RepositoryManagerMock.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -75,6 +82,7 @@
       <workItem from="1660654743182" duration="4280000" />
       <workItem from="1660754388145" duration="4234000" />
       <workItem from="1660800690712" duration="12700000" />
+      <workItem from="1660830976222" duration="2694000" />
     </task>
     <servers />
   </component>
