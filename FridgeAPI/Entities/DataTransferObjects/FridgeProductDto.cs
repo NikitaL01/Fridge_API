@@ -1,6 +1,6 @@
 ﻿namespace Entities.DataTransferObjects
 {
-    public class FridgeProductsDto
+    public class FridgeProductDto
     {
         public Guid Id { get; set; }
 

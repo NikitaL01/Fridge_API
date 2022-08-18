@@ -1,6 +1,6 @@
 ﻿namespace Entities.DataTransferObjects
 {
-    public class ProductsDto
+    public class ProductDto
     {
         public Guid Id { get; set; }
 

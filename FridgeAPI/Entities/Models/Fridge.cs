@@ -18,6 +18,6 @@ namespace Entities.Models
 
         public ICollection<FridgeModel>? FridgeModels { get; set; }
 
-        public ICollection<FridgeProducts>? FridgeProducts { get; set; }
+        public ICollection<FridgeProduct>? FridgeProducts { get; set; }
     }
 }

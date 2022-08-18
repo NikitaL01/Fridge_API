@@ -17,8 +17,8 @@ namespace Entities.Context
 
             modelBuilder.ApplyConfiguration(new FridgeConfiguration());
             modelBuilder.ApplyConfiguration(new FridgeModelConfiguration());
-            modelBuilder.ApplyConfiguration(new FridgeProductsConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductsConfiguration());
+            modelBuilder.ApplyConfiguration(new FridgeProductConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
 
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }
@@ -27,8 +27,8 @@ namespace Entities.Context
 
         public DbSet<FridgeModel>? FridgeModels { get; set; }
 
-        public DbSet<FridgeProducts>? FridgeProducts { get; set; }
+        public DbSet<FridgeProduct>? FridgeProducts { get; set; }
 
-        public DbSet<Products>? Products { get; set; }
+        public DbSet<Product>? Products { get; set; }
     }
 }

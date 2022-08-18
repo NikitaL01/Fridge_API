@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Entities.Models
 {
     [Table("fridge_products")]
-    public class FridgeProducts
+    public class FridgeProduct
     {
         [Column("id", TypeName = "UNIQUEIDENTIFIER")]
         public Guid Id { get; set; }
@@ -25,6 +25,6 @@ namespace Entities.Models
 
         public Fridge? Fridge { get; set; }
 
-        public Products? Products { get; set; }
+        public Product? Products { get; set; }
     }
 }

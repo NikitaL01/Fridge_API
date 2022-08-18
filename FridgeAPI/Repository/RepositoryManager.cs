@@ -11,9 +11,9 @@ namespace Repository
 
         private IFridgeModelRepository _fridgeModelRepository = null!;
 
-        private IFridgeProductsRepository _fridgeProductsRepository = null!;
+        private IFridgeProductRepository _fridgeProductsRepository = null!;
 
-        private IProductsRepository _productsRepository = null!;
+        private IProductRepository _productsRepository = null!;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -45,25 +45,25 @@ namespace Repository
                 return _fridgeModelRepository;
             }
         }
-        public IFridgeProductsRepository FridgeProducts
+        public IFridgeProductRepository FridgeProducts
         {
             get
             {
                 if (_fridgeProductsRepository == null)
                 {
-                    _fridgeProductsRepository = new FridgeProductsRepository(_repositoryContext);
+                    _fridgeProductsRepository = new FridgeProductRepository(_repositoryContext);
                 }
 
                 return _fridgeProductsRepository;
             }
         }
-        public IProductsRepository Products
+        public IProductRepository Products
         {
             get
             {
                 if (_productsRepository == null)
                 {
-                    _productsRepository = new ProductsRepository(_repositoryContext);
+                    _productsRepository = new ProductRepository(_repositoryContext);
                 }
 
                 return _productsRepository;

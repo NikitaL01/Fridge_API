@@ -8,9 +8,9 @@ namespace FridgeAPI_Tests.MoqObjects
 
         private IFridgeModelRepository? _fridgeModelRepository;
 
-        private IFridgeProductsRepository? _fridgeProductsRepository;
+        private IFridgeProductRepository? _fridgeProductRepository;
 
-        private IProductsRepository? _productsRepository;
+        private IProductRepository? _productRepository;
 
         public IFridgeRepository Fridge
         {
@@ -37,28 +37,28 @@ namespace FridgeAPI_Tests.MoqObjects
                 return _fridgeModelRepository;
             }
         }
-        public IFridgeProductsRepository FridgeProducts
+        public IFridgeProductRepository FridgeProducts
         {
             get
             {
-                if (_fridgeProductsRepository == null)
+                if (_fridgeProductRepository == null)
                 {
                     //_fridgeProductsRepository = new FridgeProductsRepository(_repositoryContext);
                 }
 
-                return _fridgeProductsRepository;
+                return _fridgeProductRepository;
             }
         }
-        public IProductsRepository Products
+        public IProductRepository Products
         {
             get
             {
-                if (_productsRepository == null)
+                if (_productRepository == null)
                 {
                     //_productsRepository = new ProductsRepository(_repositoryContext);
                 }
 
-                return _productsRepository;
+                return _productRepository;
             }
         }
 
