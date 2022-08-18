@@ -73,6 +73,8 @@
       <workItem from="1660572948050" duration="5631000" />
       <workItem from="1660585382161" duration="2562000" />
       <workItem from="1660654743182" duration="4280000" />
+      <workItem from="1660754388145" duration="4234000" />
+      <workItem from="1660800690712" duration="12700000" />
     </task>
     <servers />
   </component>
@@ -83,12 +85,30 @@
     <option name="coveragePercentColumnWidth" value="150" />
     <option name="sortOrder" value="DESCENDING" />
     <option name="sortedColumn" value="1" />
-    <option name="symbolColumnWidth" value="135" />
+    <option name="symbolColumnWidth" value="165" />
     <coverage-tree-state>
       <expand>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 35% 1693/2593" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 29% 1834/2590" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 29% 1834/2590" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Filters 88% 10/83" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 29% 1834/2590" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Filters 88% 10/83" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Filters.ActionFilters 88% 10/83" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 29% 1834/2590" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Filters 88% 10/83" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Filters.ActionFilters 88% 10/83" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="ValidationFilterAttribute 91% 2/22" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
       </expand>
       <select />
