@@ -6,9 +6,9 @@
 
         IFridgeModelRepository FridgeModel { get; }
 
-        IFridgeProductRepository FridgeProducts { get; }
+        IFridgeProductRepository FridgeProduct { get; }
 
-        IProductRepository Products { get; }
+        IProductRepository Product { get; }
 
         Task SaveAsync();
     }

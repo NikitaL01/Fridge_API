@@ -45,7 +45,7 @@ namespace Repository
                 return _fridgeModelRepository;
             }
         }
-        public IFridgeProductRepository FridgeProducts
+        public IFridgeProductRepository FridgeProduct
         {
             get
             {
@@ -57,7 +57,7 @@ namespace Repository
                 return _fridgeProductsRepository;
             }
         }
-        public IProductRepository Products
+        public IProductRepository Product
         {
             get
             {
