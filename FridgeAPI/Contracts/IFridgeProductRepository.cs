@@ -8,7 +8,7 @@ namespace Contracts
 
         Task<FridgeProduct> GetFridgeProductAsync(Guid fridgeProductId, bool trackChanges);
 
-        void CreateFridgeProduct(FridgeProduct fridgeProduct);
+        void CreateFridgeProduct(Guid fridgeId, Guid productId, FridgeProduct fridgeProduct);
 
         void DeleteFridgeProduct(FridgeProduct fridgeProduct);
     }

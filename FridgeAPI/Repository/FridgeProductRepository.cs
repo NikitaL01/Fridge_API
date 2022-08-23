@@ -18,7 +18,12 @@ namespace Repository
             bool trackChanges) => (await FindByCondition(i => 
                 i.Id.Equals(fridgeProductId), trackChanges).SingleOrDefaultAsync())!;
 
-        public void CreateFridgeProduct(FridgeProduct fridgeProduct) => Create(fridgeProduct);
+        public void CreateFridgeProduct(Guid fridgeId, Guid productId, FridgeProduct fridgeProduct)
+        {
+            fridgeProduct.FridgeId = fridgeId;
+            fridgeProduct.ProductId = productId;
+            Create(fridgeProduct);
+        }
 
         public void DeleteFridgeProduct(FridgeProduct fridgeProduct) => Delete(fridgeProduct);
     }
