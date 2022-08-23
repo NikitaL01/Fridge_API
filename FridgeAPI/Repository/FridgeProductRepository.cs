@@ -11,19 +11,15 @@ namespace Repository
         {
         }
 
-        public async Task<IEnumerable<FridgeProduct>> GetAllFridgeProductsAsync(bool trackChanges) =>
+        public async Task<IEnumerable<FridgeProduct>> GetFridgeProductsAsync(bool trackChanges) =>
             await FindAll(trackChanges).ToListAsync();
 
-        public async Task<FridgeProduct> GetFridgeProductAsync(Guid fridgeProductId, bool trackChanges) =>
-            (await FindByCondition(fp => fp.Id.Equals(fridgeProductId), trackChanges)
-                .SingleOrDefaultAsync())!;
+        public async Task<FridgeProduct> GetFridgeProductAsync(Guid fridgeProductId,
+            bool trackChanges) => (await FindByCondition(i => 
+                i.Id.Equals(fridgeProductId), trackChanges).SingleOrDefaultAsync())!;
 
         public void CreateFridgeProduct(FridgeProduct fridgeProduct) => Create(fridgeProduct);
 
-        public async Task<IEnumerable<FridgeProduct>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges) =>
-            await FindByCondition(fp => ids.Contains(fp.Id), trackChanges).ToListAsync();
-
-        public void DeleteFridgeProduct(FridgeProduct fridgeProduct) =>
-            Delete(fridgeProduct);
+        public void DeleteFridgeProduct(FridgeProduct fridgeProduct) => Delete(fridgeProduct);
     }
 }
