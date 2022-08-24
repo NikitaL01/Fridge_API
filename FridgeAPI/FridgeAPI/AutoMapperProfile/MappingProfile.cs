@@ -14,8 +14,12 @@ namespace FridgeAPI.AutoMapperProfile
             CreateMap<Product, ProductDto>();
             CreateMap<FridgeForCreationDto, Fridge>();
             CreateMap<FridgeModelForCreationDto, FridgeModel>();
-            CreateMap<FridgeModelForUpdateDto, FridgeModel>().ReverseMap();
+            CreateMap<FridgeForCreationDto, FridgeProduct>();
+            CreateMap<ProductForCreationDto, Product>();
             CreateMap<FridgeForUpdateDto, FridgeDto>();
+            CreateMap<FridgeModelForUpdateDto, FridgeModel>().ReverseMap();
+            CreateMap<FridgeProductForUpdateDto, FridgeProduct>().ReverseMap();
+            CreateMap<ProductForUpdateDto, Product>();
             CreateMap<FridgeForUpdateDto, Fridge>();
             CreateMap<UserForRegistrationDto, User>();
         }
