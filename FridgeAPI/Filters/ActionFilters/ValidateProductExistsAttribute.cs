@@ -21,7 +21,7 @@ public class ValidateProductExistsAttribute : IAsyncActionFilter
     {
         var trackChanges = context.HttpContext.Request.Method.Equals("PUT");
         var id = (Guid)context.ActionArguments["id"];
-        var product = await _repositoryManager.Products.GetProductAsync(id, trackChanges);
+        var product = await _repositoryManager.Product.GetProductAsync(id, trackChanges);
 
         if (product == null)
         {
