@@ -91,7 +91,7 @@ namespace FridgeAPI.Controllers
         [HttpPost]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateFridgeModelForFridge(Guid fridgeId,
-            [FromBody] FridgeModelForCreationDto fridgeModelForUpdateDto)
+            [FromBody] FridgeModelForCreationDto fridgeModelForCreationDto)
         {
             var fridge = await _repositoryManager.Fridge.GetFridgeAsync(fridgeId,
                 trackChanges: false);
@@ -103,7 +103,7 @@ namespace FridgeAPI.Controllers
                 return NotFound();
             }
 
-            var fridgeModelEntity = _mapper.Map<FridgeModel>(fridgeModelForUpdateDto);
+            var fridgeModelEntity = _mapper.Map<FridgeModel>(fridgeModelForCreationDto);
 
             _repositoryManager.FridgeModel.CreateFridgeModel(fridgeId, fridgeModelEntity);
             await _repositoryManager.SaveAsync();
