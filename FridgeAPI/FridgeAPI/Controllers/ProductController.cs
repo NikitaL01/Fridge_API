@@ -34,7 +34,7 @@ namespace FridgeAPI.Controllers
         [HttpGet(Name = "GetProducts"), Authorize]
         public async Task<IActionResult> GetProducts()
         {
-            var products = await _repositoryManager.Products
+            var products = await _repositoryManager.Product
                 .GetAllProductsAsync(trackChanges: false);
 
             if (products == null)
@@ -64,7 +64,7 @@ namespace FridgeAPI.Controllers
         {
             var productEntity = _mapper.Map<Product>(product);
 
-            _repositoryManager.Products.CreateProduct(productEntity);
+            _repositoryManager.Product.CreateProduct(productEntity);
             await _repositoryManager.SaveAsync();
 
             var productToReturn = _mapper.Map<ProductDto>(productEntity);
@@ -83,7 +83,7 @@ namespace FridgeAPI.Controllers
                 return BadRequest("Parameter ids is null");
             }
 
-            var productEntites = await _repositoryManager.Products.GetByIdsAsync(ids,
+            var productEntites = await _repositoryManager.Product.GetByIdsAsync(ids,
                 trackChanges: false);
 
             if (ids.Count() != productEntites.Count())
@@ -116,7 +116,7 @@ namespace FridgeAPI.Controllers
             var productEntities = _mapper.Map<IEnumerable<Product>>(productCollection);
             foreach (var product in productEntities)
             {
-                _repositoryManager.Products.CreateProduct(product);
+                _repositoryManager.Product.CreateProduct(product);
             }
 
             await _repositoryManager.SaveAsync();
@@ -134,7 +134,7 @@ namespace FridgeAPI.Controllers
         {
             var product = HttpContext.Items["product"] as Product;
 
-            _repositoryManager.Products.DeleteProduct(product!);
+            _repositoryManager.Product.DeleteProduct(product!);
             await _repositoryManager.SaveAsync();
 
             return NoContent();
