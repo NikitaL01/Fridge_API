@@ -26,5 +26,11 @@ namespace Repository
         }
 
         public void DeleteFridgeProduct(FridgeProduct fridgeProduct) => Delete(fridgeProduct);
+
+        public async Task<FridgeProduct> FindByParameters(Guid fridgeId, Guid productId, int quantity) =>
+            (await FindByCondition(fp =>
+                fp.FridgeId.Equals(fridgeId) &&
+                fp.ProductId.Equals(productId) &&
+                fp.Quantuty.Equals(quantity), false).SingleOrDefaultAsync())!;
     }
 }

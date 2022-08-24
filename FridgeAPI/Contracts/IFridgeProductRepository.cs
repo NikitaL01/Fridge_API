@@ -11,5 +11,7 @@ namespace Contracts
         void CreateFridgeProduct(Guid fridgeId, Guid productId, FridgeProduct fridgeProduct);
 
         void DeleteFridgeProduct(FridgeProduct fridgeProduct);
+
+        Task<FridgeProduct> FindByParameters(Guid fridgeId, Guid productId, int quantity);
     }
 }
