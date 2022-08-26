@@ -96,7 +96,7 @@ namespace FridgeAPI.Utility
                 new Link(_linkGenerator.GetUriByAction(httpContext,
                 "PartiallyUpdateFridgeModelForFridge",
                 values: new { fridgeId, id }),
-                "partiallt_update_fridge_model",
+                "partially_update_fridge_model",
                 "PATCH")
             };
 
