@@ -21,7 +21,7 @@ namespace Entities.Models
 
         [Required]
         [Column("quantity", TypeName = "int")]
-        public int Quantuty { get; set; }
+        public int Quantity { get; set; }
 
         public Fridge? Fridge { get; set; }
 
