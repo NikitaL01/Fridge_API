@@ -8,6 +8,7 @@ using Entities.DataTransferObjects;
 using Entities.Models;
 using Filters.ActionFilters;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 
 namespace FridgeAPI.Controllers
 {
@@ -89,29 +90,43 @@ namespace FridgeAPI.Controllers
                 id = productToReturn.Id }, productToReturn);
         }
 
-        [HttpDelete("{id}")]
-        [ServiceFilter(typeof(ValidationFilterAttribute))]
-        [ServiceFilter(typeof(ValidateProductForFridgeExistsAttribute))]
-        public async Task<IActionResult> DeleteProductForFridge(Guid fridgeId, Guid id,
-            [FromBody] FridgeProductForDeleteDto fridgeProductForDeleteDto)
+        [HttpDelete]
+        [Route("api/fridgeProduct/{fridgeProductId}")]
+        public async Task<IActionResult> DeleteProductForFridge(Guid fridgeProductId)
         {
-            var fridgeProductEntity = HttpContext.Items["fridgeProduct"] as FridgeProduct;
-            
-            _repositoryManager.FridgeProduct.DeleteFridgeProduct(fridgeProductEntity!);
+            var fridgeProductFromDb = await _repositoryManager.FridgeProduct
+                .GetFridgeProductAsync(fridgeProductId, trackChanges: false);
+
+            if (fridgeProductFromDb == null)
+            {
+                _loggerManager.LogInfo($"FridgeProduct with id: {fridgeProductId} doesn't" +
+                                       $" exist in the database.");
+                return NotFound();
+            }
+
+            _repositoryManager.FridgeProduct.DeleteFridgeProduct(fridgeProductFromDb!);
             await _repositoryManager.SaveAsync();
 
             return NoContent();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("api/fridgeProduct/{fridgeProductId}")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        [ServiceFilter(typeof(ValidateProductForFridgeExistsAttribute))]
-        public async Task<IActionResult> UpdateFridgeModelForFridge(Guid fridgeId, Guid id,
+        public async Task<IActionResult> UpdateProductForFridge(Guid fridgeProductId,
             [FromBody] FridgeProductForUpdateDto fridgeProductForUpdateDto)
         {
-            var fridgeProductEntity = HttpContext.Items["fridgeProduct"] as FridgeProduct;
+            var fridgeProductFromDb = await _repositoryManager.FridgeProduct
+                .GetFridgeProductAsync(fridgeProductId, trackChanges: false);
 
-            _mapper.Map(fridgeProductForUpdateDto, fridgeProductEntity);
+            if (fridgeProductFromDb == null)
+            {
+                _loggerManager.LogInfo($"FridgeProduct with id: {fridgeProductId} doesn't" +
+                                       $" exist in the database.");
+                return NotFound();
+            }
+
+            _mapper.Map(fridgeProductForUpdateDto, fridgeProductFromDb);
             await _repositoryManager.SaveAsync();
 
             return NoContent();
