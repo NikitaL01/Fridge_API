@@ -74,7 +74,7 @@ namespace FridgeAPI.Controllers
         }
 
         [HttpGet("collecton/({ids})", Name = "ProductCollection")]
-        public async Task<IActionResult> GetFridgeCollection([ModelBinder(BinderType =
+        public async Task<IActionResult> GetProductCollection([ModelBinder(BinderType =
             typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {
             if (ids == null)
@@ -92,13 +92,13 @@ namespace FridgeAPI.Controllers
                 return NotFound();
             }
 
-            var productsToReturn = _mapper.Map<IEnumerable<FridgeDto>>(productEntites);
+            var productsToReturn = _mapper.Map<IEnumerable<ProductDto>>(productEntites);
             return Ok(productsToReturn);
         }
 
         [HttpPost("collecton")]
         public async Task<IActionResult> CreateProductCollection([FromBody]
-            IEnumerable<FridgeForCreationDto> productCollection)
+            IEnumerable<ProductForCreationDto> productCollection)
         {
             if (productCollection == null)
             {
