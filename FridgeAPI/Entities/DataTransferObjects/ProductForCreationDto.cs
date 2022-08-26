@@ -1,5 +1,5 @@
 ﻿namespace Entities.DataTransferObjects;
 
-public class ProductForCreationDto : FridgeProductForManipulationDto
+public class ProductForCreationDto : ProductForManipulationDto
 {
 }
