@@ -37,25 +37,25 @@ namespace FridgeAPI_Tests.MoqObjects
                 return _fridgeModelRepository;
             }
         }
-        public IFridgeProductRepository FridgeProducts
+        public IFridgeProductRepository FridgeProduct
         {
             get
             {
                 if (_fridgeProductRepository == null)
                 {
-                    //_fridgeProductsRepository = new FridgeProductsRepository(_repositoryContext);
+                    _fridgeProductRepository = new FridgeProductRepositoryMock();
                 }
 
                 return _fridgeProductRepository;
             }
         }
-        public IProductRepository Products
+        public IProductRepository Product
         {
             get
             {
                 if (_productRepository == null)
                 {
-                    //_productsRepository = new ProductsRepository(_repositoryContext);
+                    _productRepository = new ProductRepositoryMock();
                 }
 
                 return _productRepository;
