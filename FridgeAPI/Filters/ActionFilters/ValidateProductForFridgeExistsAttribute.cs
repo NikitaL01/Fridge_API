@@ -42,26 +42,7 @@ public class ValidateProductForFridgeExistsAttribute : IAsyncActionFilter
             _loggerManager.LogInfo($"Product with id {id} doesn't exist in the" +
                                    $" database.");
             context.Result = new NotFoundResult();
-        }
-
-        if (method.Equals("PUT") || method.Equals("DELETE"))
-        {
-            var fridgeProductForManipulationDto = context.ActionArguments.SingleOrDefault(x =>
-                x.Value != null && x.Value.ToString()!.Contains("Dto")).Value
-                as FridgeProductForManipulationDto;
-            
-            if (fridgeProductForManipulationDto is not null)
-            {
-                var fridgeProduct = await _repositoryManager.FridgeProduct
-                    .FindByParameters(fridgeId, id, fridgeProductForManipulationDto.Quantity);
-                context.HttpContext.Items.Add("fridgeProduct", fridgeProduct);
-            }
-            else
-            {
-                _loggerManager.LogInfo($"FridgeProduct with fridgeId {fridgeId}" +
-                                       $" and productId {id} doesn't exist in the database.");
-                context.Result = new NotFoundResult();
-            }
+            return;
         }
 
         context.HttpContext.Items.Add("product", product);
