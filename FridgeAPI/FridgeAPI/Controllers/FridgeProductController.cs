@@ -90,7 +90,7 @@ namespace FridgeAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("api/fridgeProduct/{fridgeProductId}")]
+        [Route("api/fridgeProducts/{fridgeProductId}")]
         public async Task<IActionResult> DeleteProductForFridge(Guid fridgeProductId)
         {
             var fridgeProductFromDb = await _repositoryManager.FridgeProduct
@@ -110,7 +110,7 @@ namespace FridgeAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/fridgeProduct/{fridgeProductId}")]
+        [Route("api/fridgeProducts/{fridgeProductId}")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> UpdateProductForFridge(Guid fridgeProductId,
             [FromBody] FridgeProductForUpdateDto fridgeProductForUpdateDto)

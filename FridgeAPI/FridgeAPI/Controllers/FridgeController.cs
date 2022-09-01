@@ -76,7 +76,7 @@ namespace FridgeAPI.Controllers
             return CreatedAtRoute("FridgeById", new { id = fridgeToReturn.Id }, fridgeToReturn);
         }
 
-        [HttpGet("collecton/({ids})", Name = "FridgeCollection")]
+        [HttpGet("collection/({ids})", Name = "FridgeCollection")]
         public async Task<IActionResult> GetFridgeCollection([ModelBinder(BinderType =
             typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {
@@ -98,7 +98,7 @@ namespace FridgeAPI.Controllers
             return Ok(fridgesToReturn);
         }
 
-        [HttpPost("collecton")]
+        [HttpPost("collection")]
         public async Task<IActionResult> CreateFridgeCollection([FromBody]
             IEnumerable<FridgeForCreationDto> fridgeCollection)
         {

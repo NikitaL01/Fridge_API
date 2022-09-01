@@ -73,7 +73,7 @@ namespace FridgeAPI.Controllers
                 productToReturn);
         }
 
-        [HttpGet("collecton/({ids})", Name = "ProductCollection")]
+        [HttpGet("collection/({ids})", Name = "ProductCollection")]
         public async Task<IActionResult> GetProductCollection([ModelBinder(BinderType =
             typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {
@@ -96,7 +96,7 @@ namespace FridgeAPI.Controllers
             return Ok(productsToReturn);
         }
 
-        [HttpPost("collecton")]
+        [HttpPost("collection")]
         public async Task<IActionResult> CreateProductCollection([FromBody]
             IEnumerable<ProductForCreationDto> productCollection)
         {
