@@ -68,8 +68,7 @@ namespace FridgeAPI
             services.ConfigureRateLimitingOptions();
             services.AddInMemoryRateLimiting();
             services.AddHttpContextAccessor();
-
-            services.AddAuthentication();
+            
             services.ConfigureIdentity();
             services.ConfigureJwt(Configuration);
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
@@ -99,7 +98,7 @@ namespace FridgeAPI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseCors("CorsPolicy");
+            app.UseCors();
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {

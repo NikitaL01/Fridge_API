@@ -36,7 +36,8 @@ namespace FridgeAPI.Controllers
         /// Gets the list of all fridges.
         /// </summary>
         /// <returns>The fridges list.</returns>
-        [HttpGet(Name = "GetFridges"), Authorize]
+        [Authorize]
+        [HttpGet(Name = "GetFridges")]
         public async Task<IActionResult> GetFridges()
         {
             var fridges = await _repositoryManager.Fridge.GetAllFridgesAsync(trackChanges: false);
@@ -156,7 +157,7 @@ namespace FridgeAPI.Controllers
         }
 
         [HttpOptions]
-        public IActionResult GetFridgesOptions()
+        public async Task<IActionResult> GetFridgesOptions()
         {
             Response.Headers.Add("Allow", "GET, OPTIONS, POST");
 

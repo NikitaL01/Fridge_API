@@ -32,10 +32,10 @@ namespace FridgeAPI.Extensions
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy", builder =>
-                builder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+                options.AddDefaultPolicy(builder =>
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
             });
         }
 

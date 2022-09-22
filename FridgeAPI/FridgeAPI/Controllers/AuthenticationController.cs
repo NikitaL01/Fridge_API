@@ -70,7 +70,10 @@ namespace FridgeAPI.Controllers
             }
 
             await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
-            return StatusCode(201);
+
+            await _authenticationManager.ValidateUser(_mapper.Map<UserForAuthenticationDto>(user));
+
+            return Ok(await _authenticationManager.CreateToken());
         }
 
         [HttpPost("login")]
@@ -84,7 +87,7 @@ namespace FridgeAPI.Controllers
                 return Unauthorized();
             }
 
-            return Ok(new { Token = await _authenticationManager.CreateToken() });
+            return Ok(await _authenticationManager.CreateToken());
         }
     }
 }
